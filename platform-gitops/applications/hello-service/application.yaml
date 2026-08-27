@@ -3,7 +3,7 @@ kind: Application
 
 metadata:
   name: hello-service
-  namespace: argocd
+  namespace: demo
 
 spec:
   project: default
