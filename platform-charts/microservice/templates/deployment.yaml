@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: {{ include "microservice.fullname" . }}
+  labels:
+    {{- include "microservice.labels" . | nindent 4 }}
+
+spec:
+  replicas: {{ .Values.replicaCount }}
+
+  selector:
+    matchLabels:
+      {{- include "microservice.selectorLabels" . | nindent 6 }}
+
+  template:
+    metadata:
+      labels:
+        {{- include "microservice.selectorLabels" . | nindent 8 }}
+
+    spec:
+      serviceAccountName: {{ include "microservice.serviceAccountName" . }}
+
+      containers:
+        - name: {{ .Chart.Name }}
+
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.targetPort }}
+              protocol: TCP
+
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+
+          {{- if .Values.environment }}
+          env:
+            {{- range $key, $value := .Values.environment }}
+            - name: {{ $key }}
+              value: {{ $value | quote }}
+            {{- end }}
+          {{- end }}
