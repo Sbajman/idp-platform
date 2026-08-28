@@ -13,13 +13,15 @@ spec:
     # Platform-owned Helm chart
     - repoURL: https://github.com/Sbajman/idp-platform.git
       targetRevision: main
-      path: platform-charts/microservice
+      #path: platform-charts/microservice
+      path: platform-gitops/applications/catalog-service/overlays/local
+      kustomize: {}
 
-      helm:
-        releaseName: catalog-service
+      # helm:
+      #   releaseName: catalog-service
 
-        valueFiles:
-          - $values/platform-gitops/applications/catalog-service/base/values.yaml
+      #   valueFiles:
+      #     - $values/platform-gitops/applications/catalog-service/base/values.yaml
 
     # Git-managed application configuration
     - repoURL: https://github.com/Sbajman/idp-platform.git

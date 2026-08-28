@@ -6,6 +6,6 @@ helmGlobals:
 
 helmCharts:
   - name: microservice
-    releaseName: hello-service
+    releaseName: catalog-service
     namespace: demo
     valuesFile: values.yaml

@@ -3,7 +3,7 @@ kind: Application
 
 metadata:
   name: hello-service
-  namespace: demo
+  namespace: argocd
 
 spec:
   project: default
@@ -15,13 +15,15 @@ spec:
     # --------------------------------------------------
     - repoURL: https://github.com/Sbajman/idp-platform.git
       targetRevision: main
-      path: platform-charts/microservice
+      #path: platform-charts/microservice
+      path: platform-gitops/applications/hello-service/overlays/local
+      kustomize: {}
 
-      helm:
-        releaseName: hello-service
+      # helm:
+      #   releaseName: hello-service
 
-        valueFiles:
-          - $values/platform-gitops/applications/hello-service/base/values.yaml
+      #   valueFiles:
+      #     - $values/platform-gitops/applications/hello-service/base/values.yaml
 
 
     # --------------------------------------------------
