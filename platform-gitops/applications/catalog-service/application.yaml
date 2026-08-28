@@ -16,6 +16,7 @@ spec:
       #path: platform-charts/microservice
       path: platform-gitops/applications/catalog-service/overlays/local
       kustomize: {}
+        # buildOptions: --enable-helm
 
       # helm:
       #   releaseName: catalog-service

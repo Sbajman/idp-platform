@@ -18,6 +18,7 @@ spec:
       #path: platform-charts/microservice
       path: platform-gitops/applications/hello-service/overlays/local
       kustomize: {}
+        # buildOptions: --enable-helm
 
       # helm:
       #   releaseName: hello-service
