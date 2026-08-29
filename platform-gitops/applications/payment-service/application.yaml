@@ -1,0 +1,42 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+
+metadata:
+  name: catalog-service
+  namespace: argocd
+
+spec:
+  project: default
+
+  sources:
+
+    # Platform-owned Helm chart
+    - repoURL: https://github.com/Sbajman/idp-platform.git
+      targetRevision: main
+      #path: platform-charts/microservice
+      path: platform-gitops/applications/catalog-service/overlays/local
+      kustomize: {}
+        # buildOptions: --enable-helm
+
+      # helm:
+      #   releaseName: catalog-service
+
+      #   valueFiles:
+      #     - $values/platform-gitops/applications/catalog-service/base/values.yaml
+
+    # Git-managed application configuration
+    - repoURL: https://github.com/Sbajman/idp-platform.git
+      targetRevision: main
+      ref: values
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: demo
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
+    syncOptions:
+      - CreateNamespace=true

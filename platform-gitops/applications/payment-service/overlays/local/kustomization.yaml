@@ -1,0 +1,18 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ../../base
+
+namespace: demo
+
+labels:
+  - pairs:
+      platform.example.com/environment: local
+      platform.example.com/application: payment-service
+      platform.example.com/managed-by: idp-platform
+    includeSelectors: false
+
+commonAnnotations:
+  platform.example.com/environment: local
+  platform.example.com/owner: platform-team

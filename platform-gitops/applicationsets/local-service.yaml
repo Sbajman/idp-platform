@@ -1,0 +1,48 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+
+metadata:
+  name: local-services
+  namespace: argocd
+
+spec:
+  goTemplate: true
+  goTemplateOptions:
+    - missingkey=error
+
+  generators:
+    - git:
+        repoURL: https://github.com/Sbajman/idp-platform.git
+        revision: main
+        directories:
+          - path: platform-gitops/applications/*/overlays/local
+
+  template:
+    metadata:
+      name: '{{ index .path.segments 2 }}'
+
+      labels:
+        platform.example.com/managed-by: applicationset
+        platform.example.com/environment: local
+
+    spec:
+      project: default
+
+      source:
+        repoURL: https://github.com/Sbajman/idp-platform.git
+        targetRevision: main
+        path: '{{ .path.path }}'
+
+        kustomize: {}
+
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: demo
+
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+
+        syncOptions:
+          - CreateNamespace=true
