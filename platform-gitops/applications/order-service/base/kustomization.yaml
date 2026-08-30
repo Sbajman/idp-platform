@@ -4,6 +4,6 @@ helmGlobals:
   chartHome: ../../../../platform-charts
 helmCharts:
 - name: microservice
-  releaseName: payment-service
+  releaseName: order-service
   namespace: demo
   valuesFile: values.yaml

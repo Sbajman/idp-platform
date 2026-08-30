@@ -2,11 +2,11 @@ apiVersion: platform.example.com/v1alpha1
 kind: Service
 
 metadata:
-  name: payment-service
+  name: order-service
 
 spec:
-  owner: payments-team
-  description: Payment processing service
+  owner: order-team
+  description: Order processing service
 
   image:
     repository: nginx

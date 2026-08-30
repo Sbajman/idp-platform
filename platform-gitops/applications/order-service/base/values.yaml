@@ -8,7 +8,7 @@ service:
   port: 80
 env:
   ENVIRONMENT: local
-  SERVICE_NAME: payment-service
+  SERVICE_NAME: order-service
 resources:
   requests:
     cpu: 100m

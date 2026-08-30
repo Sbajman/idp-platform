@@ -6,9 +6,9 @@ namespace: demo
 labels:
 - pairs:
     platform.example.com/environment: local
-    platform.example.com/application: payment-service
+    platform.example.com/application: order-service
     platform.example.com/managed-by: idp-platform
   includeSelectors: false
 commonAnnotations:
   platform.example.com/environment: local
-  platform.example.com/owner: payments-team
+  platform.example.com/owner: order-team
